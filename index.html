@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stroop Task Experiment</title>
+    <!-- jsPsych v8 core -->
+    <script src="https://unpkg.com/jspsych@8.0.0"></script>
+    <!-- jsPsych plugins -->
+    <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@2.0.0"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-button-response@2.0.0"></script>
+    <!-- jsPsych CSS -->
+    <link href="https://unpkg.com/jspsych@8.0.0/css/jspsych.css" rel="stylesheet" type="text/css" />
+    <style>
+        body {
+            background-color: #f0f0f0;
+        }
+        .stroop-stimulus {
+            font-size: 60px;
+            font-weight: bold;
+        }
+        .jspsych-content {
+            max-width: 800px;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // Initialize jsPsych
+        const jsPsych = initJsPsych({
+            on_finish: function() {
+                jsPsych.data.displayData('json');
+            }
+        });
+
+        // Create timeline
+        let timeline = [];
+
+        // Welcome page
+        const welcome = {
+            type: jsPsychHtmlButtonResponse,
+            stimulus: `
+                <div style="font-size: 20px; line-height: 1.6;">
+                    <h1>ストループ課題へようこそ</h1>
+                    <p>これから色と文字が一致しているか判断する課題を行います。</p>
+                    <p>画面に表示される文字の<strong>色</strong>を判断してください。</p>
+                    <p>以下のキーを使用してください：</p>
+                    <ul style="list-style-position: inside;">
+                        <li><strong>R</strong>キー: 赤色</li>
+                        <li><strong>B</strong>キー: 青色</li>
+                        <li><strong>G</strong>キー: 緑色</li>
+                    </ul>
+                    <p>準備ができたら「開始」ボタンを押してください。</p>
+                </div>
+            `,
+            choices: ['開始']
+        };
+        timeline.push(welcome);
+
+        // Stroop task trials
+        const stroop_stimuli = [
+            { word: '赤', color: 'red', correct_response: 'r', congruent: true },
+            { word: '青', color: 'green', correct_response: 'g', congruent: false },
+            { word: '緑', color: 'blue', correct_response: 'b', congruent: false }
+        ];
+
+        // Create trial for each stimulus
+        stroop_stimuli.forEach((stimulus, index) => {
+            const trial = {
+                type: jsPsychHtmlKeyboardResponse,
+                stimulus: `<div class="stroop-stimulus" style="color: ${stimulus.color};">${stimulus.word}</div>`,
+                choices: ['r', 'b', 'g'],
+                data: {
+                    task: 'stroop',
+                    word: stimulus.word,
+                    color: stimulus.color,
+                    correct_response: stimulus.correct_response,
+                    congruent: stimulus.congruent,
+                    trial_number: index + 1
+                },
+                on_finish: function(data) {
+                    data.correct = data.response === data.correct_response;
+                }
+            };
+            timeline.push(trial);
+        });
+
+        // Thanks page
+        const thanks = {
+            type: jsPsychHtmlButtonResponse,
+            stimulus: `
+                <div style="font-size: 20px; line-height: 1.6;">
+                    <h1>実験は終了しました</h1>
+                    <p>ご協力ありがとうございました。</p>
+                    <p>データは正常に記録されました。</p>
+                </div>
+            `,
+            choices: ['終了']
+        };
+        timeline.push(thanks);
+
+        // Run the experiment
+        jsPsych.run(timeline);
+    </script>
+</body>
+</html>
