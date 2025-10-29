@@ -1,0 +1,20 @@
+{
+  "name": "test-psych-experiment",
+  "version": "1.0.0",
+  "description": "This program is a test to verify Pavlovia's operation.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@jspsych/plugin-html-button-response": "^2.0.0",
+    "@jspsych/plugin-html-keyboard-response": "^2.0.0",
+    "jspsych": "^8.0.0"
+  }
+}
