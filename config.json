@@ -1,0 +1,12 @@
+{
+  "experiment": {
+    "name": "stroop-task",
+    "fullpath": "YuseiNozaki/test-psych-experiment",
+    "saveFormat": "CSV",
+    "saveIncompleteResults": true,
+    "status": "RUNNING"
+  },
+  "pavlovia": {
+    "URL": "https://pavlovia.org"
+  }
+}

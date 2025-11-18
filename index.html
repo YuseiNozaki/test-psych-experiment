@@ -11,6 +11,8 @@
     <script src="https://unpkg.com/@jspsych/plugin-html-button-response@2.0.0"></script>
     <!-- jsPsych CSS -->
     <link href="https://unpkg.com/jspsych@8.0.0/css/jspsych.css" rel="stylesheet" type="text/css" />
+    <!-- Pavlovia plugin -->
+    <script src="jspsych-pavlovia-modified.js"></script>
     <style>
         body {
             background-color: #f0f0f0;
@@ -35,6 +37,13 @@
 
         // Create timeline
         let timeline = [];
+
+        // Pavlovia initialization
+        const pavlovia_init = {
+            type: jsPsychPavlovia,
+            command: 'init'
+        };
+        timeline.push(pavlovia_init);
 
         // Welcome page
         const welcome = {
@@ -98,6 +107,14 @@
             choices: ['終了']
         };
         timeline.push(thanks);
+
+        // Pavlovia finish - save data and close session
+        const pavlovia_finish = {
+            type: jsPsychPavlovia,
+            command: 'finish',
+            participantId: 'PARTICIPANT'
+        };
+        timeline.push(pavlovia_finish);
 
         // Run the experiment
         jsPsych.run(timeline);
