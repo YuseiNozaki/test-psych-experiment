@@ -93,15 +93,7 @@
             };
             timeline.push(trial);
         });
-
-        // Pavlovia finish - save data and close session
-        const pavlovia_finish = {
-            type: jsPsychPavlovia,
-            command: 'finish',
-            participantId: 'PARTICIPANT'
-        };
-        timeline.push(pavlovia_finish);
-
+    
         // Thanks page
         const thanks = {
             type: jsPsychHtmlButtonResponse,
@@ -115,6 +107,14 @@
             choices: ['終了']
         };
         timeline.push(thanks);
+
+        // Pavlovia finish - save data and close session
+        const pavlovia_finish = {
+            type: jsPsychPavlovia,
+            command: 'finish',
+            participantId: 'PARTICIPANT'
+        };
+        timeline.push(pavlovia_finish);
 
         // Run the experiment
         jsPsych.run(timeline);
