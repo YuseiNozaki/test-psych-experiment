@@ -2,7 +2,7 @@
 This program is a test to verify Pavlovia's operation.
 
 ## Overview
-A simple Stroop task experiment implemented using jsPsych v8 with Pavlovia integration. The experiment includes:
+A simple Stroop task experiment implemented using jsPsych v7.1.2 with Pavlovia integration. The experiment includes:
 - Welcome page with instructions (in Japanese)
 - 3 Stroop task trials
 - Thanks page
@@ -10,7 +10,7 @@ A simple Stroop task experiment implemented using jsPsych v8 with Pavlovia integ
 
 ## Pavlovia Integration
 
-This experiment uses the jspsych-pavlovia-modified.js plugin for jsPsych v8 compatibility with Pavlovia. The integration includes:
+This experiment uses the official Pavlovia plugin for jsPsych v7.1.2. The integration includes:
 
 - **pavlovia_init**: Initializes the Pavlovia session at the start of the experiment
 - **pavlovia_finish**: Saves data and closes the Pavlovia session at the end of the experiment
@@ -42,7 +42,6 @@ http://localhost:8080/index.html
    - Set `experiment.name` to your experiment name
 2. Upload all files to your Pavlovia project repository:
    - `index.html` - Main experiment file
-   - `jspsych-pavlovia-modified.js` - Pavlovia integration plugin
    - `config.json` - Pavlovia configuration
 3. Set your experiment to "RUNNING" status on Pavlovia dashboard
 4. Data will be automatically saved to Pavlovia when participants complete the experiment
@@ -57,18 +56,11 @@ When testing locally or in pilot mode, the experiment will offer a CSV file down
 
 ## Files
 - `index.html` - Main experiment file with Pavlovia integration
-- `jspsych-pavlovia-modified.js` - Pavlovia plugin for jsPsych v8
 - `config.json` - Pavlovia configuration file
 
 ## Dependencies
-All jsPsych dependencies are loaded from unpkg.com CDN:
-- jsPsych v8.0.0
-- @jspsych/plugin-html-keyboard-response v2.0.0
-- @jspsych/plugin-html-button-response v2.0.0
-
-Local files required for Pavlovia:
-- jspsych-pavlovia-modified.js (from [xhzair/jspsychv8-pavlovia](https://github.com/xhzair/jspsychv8-pavlovia))
-
-## Credits
-
-The Pavlovia integration uses the jspsych-pavlovia-modified.js plugin from [xhzair/jspsychv8-pavlovia](https://github.com/xhzair/jspsychv8-pavlovia), which provides jsPsych v8 compatibility with Pavlovia.
+All dependencies are loaded from Pavlovia's CDN:
+- jsPsych v7.1.2 (core library)
+- jspsych-html-keyboard-response plugin
+- jspsych-html-button-response plugin
+- jspsych-7-pavlovia-2022.1.1 (official Pavlovia integration plugin)
