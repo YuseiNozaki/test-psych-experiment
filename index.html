@@ -11,6 +11,8 @@
     <script src="https://unpkg.com/@jspsych/plugin-html-button-response@2.0.0"></script>
     <!-- jsPsych CSS -->
     <link href="https://unpkg.com/jspsych@8.0.0/css/jspsych.css" rel="stylesheet" type="text/css" />
+    <!-- Pavlovia integration -->
+    <script type="text/javascript" src="lib/jspsych-7-pavlovia-2022.1.1.js"></script>
     <style>
         body {
             background-color: #f0f0f0;
@@ -35,6 +37,13 @@
 
         // Create timeline
         let timeline = [];
+
+        /* init connection with pavlovia.org */
+        const pavlovia_init = {
+        type: jsPsychPavlovia,
+        command: "init"
+        };
+        timeline.push(pavlovia_init);
 
         // Welcome page
         const welcome = {
@@ -85,6 +94,13 @@
             timeline.push(trial);
         });
 
+        /* finish connection with pavlovia.org */
+        var pavlovia_finish = {
+        type: jsPsychPavlovia,
+        command: "finish"
+        };
+        timeline.push(pavlovia_finish);
+        
         // Thanks page
         const thanks = {
             type: jsPsychHtmlButtonResponse,
